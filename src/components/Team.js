@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, Image, Row, Col } from 'react-bootstrap';
 import { ReactDOM } from 'react';
 import Infos from './Infos';
-import chaussures from '../images/chaussures.jpg';
+//import chaussures from '../images/chaussures.jpg';
 import fidal_joacquime from '../images/fidal_joacquime.jpg';
 
 

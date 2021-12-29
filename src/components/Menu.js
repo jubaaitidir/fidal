@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Button, Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
 import logo from '../images/logo.png';
-import chaussures from '../images/chaussures.jpg'
+//import chaussures from './chaussures.jpg'
 import Products from './Products';
 import Team from './Team';
 import History from './History';

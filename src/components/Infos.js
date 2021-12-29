@@ -16,7 +16,7 @@ let Infos = {
             "name_prod": "chaussures",
             "code_prod": "chaussures-cuire",
             "description": "nos chaussures sont en cuire",
-            "img_prod_src": "./chaussures.jpg"
+            "img_prod_src": "chaussures.jpg"
         },
         {
             "id_product": 2,

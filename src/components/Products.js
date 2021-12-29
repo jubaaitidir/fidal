@@ -17,7 +17,7 @@ function importAll(r) {
 function Products() {
     let list_products = Infos.products;
     console.log("****************"+window.location.origin)
-    const images = importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/));
+    //const images = importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/));
 
     console.log(list_products.forEach(el=>(console.log(el.img_prod_src))));
     let rows_products = list_products.map((product) => (
@@ -26,8 +26,8 @@ function Products() {
         <Row className="justify-content-md-center" fluid rounded >
 
             <Col className="justify-content-md-center" xs lg="6" fluid rounded>
-
-                <Image src={images[product.img_prod_src]} width='200' fluid rounded />
+            {/* images[product.img_prod_src] */}
+                <Image src={`../images/${product.img_prod_src}`} width='200' fluid rounded />
                 <h2>{product.name_prod}</h2>
                 <h3>{product.description}</h3>
             </Col>

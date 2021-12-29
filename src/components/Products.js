@@ -31,11 +31,11 @@ function Products() {
 
         <Row className="justify-content-md-center" fluid rounded >
 
-            <Col className="justify-content-md-center" xs lg="6" fluid rounded>
+            <Col className="justify-content-md-center"  lg={6} fluid rounded>
             {/* images[product.img_prod_src]        `../images/${product.img_prod_src}`*/}
-                <Image src={`${product.img_prod_src}`} width='200' fluid rounded />
-                <h2>{product.name_prod}</h2>
-                <h3>{product.description}</h3>
+                <Image  className="md-6" src={images[product.img_prod_src].default } width="500" fluid rounded />
+                <h2 className="d-flex justify-content-center" >{product.name_prod}</h2>
+                <h3 className="d-flex justify-content-center" >{product.description}</h3>
             </Col>
 
 

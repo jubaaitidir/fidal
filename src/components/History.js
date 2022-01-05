@@ -14,7 +14,7 @@ function History() {
     
 
 
-            <Row className="justify-content-md-center" fluid fluid >
+            <Row className="justify-content-md-center" fluid rounded >
 
                 <Col xs lg="6" className='border border-blue' fluid rounded>
 
@@ -28,7 +28,7 @@ function History() {
             </Row>)
     );
     return (
-        <Container fluid rounded>
+        <Container className="d-flex justify-content-center" fluid rounded>
             {rows_history}
         </Container>
     );

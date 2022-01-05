@@ -16,22 +16,48 @@ let Infos = {
             "name_prod": "chaussures",
             "code_prod": "chaussures-cuire",
             "description": "nos chaussures sont en cuire",
-            "img_prod_src": 'chaussures.jpg'
+            "img_prod_src": 'chaussures.jpg',
+            "price": 100,
+            "isSpecialOffer": false
         },
         {
             "id_product": 2,
             "name_prod": "produits d'entretiens",
             "code_prod": "produits-entretien",
             "description": "les incontournables",
-            "img_prod_src": "produits_entretien.jpg"
+            "img_prod_src": "produits_entretien.jpg",
+            "price": 25,
+            "isSpecialOffer": false
+
         },
         {
             "id_product": 3,
             "name_prod": "clé et sécurité",
             "code_prod": "clé-et-sécurité",
             "description": "renforcer la sécurité de votre habitation",
-            "img_prod_src": "cle_securite.jpg"
+            "img_prod_src": "cle_securite.jpg",
+            "price": 12,
+            "isSpecialOffer": false
+        },
+        {
+            "id_product": 4,
+            "name_prod": "chaussures maron cuire",
+            "code_prod": "chaussures-maron-cuire-soldes",
+            "description": "nos chaussures sont en cuire",
+            "img_prod_src": 'chaussures.jpg',
+            "price": 45,
+            "isSpecialOffer": true
+        },
+        {
+            "id_product": 5,
+            "name_prod": "clé soldes",
+            "code_prod": "clé-soldes",
+            "description": "des clé en double à moitié prix",
+            "img_prod_src": "cle_securite.jpg",
+            "price": 6,
+            "isSpecialOffer": true
         }
+    
 
     ],
     "team": [

@@ -1,19 +1,32 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
 //import './App.css';
 import Banner from './Banner';
 import Menu from './Menu';
-
+import Footer from './Footer';
+import Infos from './Infos';
+// const Banner = lazy(() => import("./Banner"));
 function App() {
+
   return (
-    <div ClassName="App">
-      
-      <header ClassName="App-header">
-        <Menu />
+
+    <div className="App">
+
+
+
+      <header className="App-header" id="header">
+        <Menu products={Infos.products} />
       </header>
 
-      <div ClassName="App-body" id="main">
-        <Banner />
-      </div>
+      
+        <div className="align-items-center text-center App-body" id="main">
+
+        </div>
+     
+      <footer className="App-header" id="footer">
+        <Footer />
+      </footer>
 
     </div>
   );

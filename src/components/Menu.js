@@ -11,7 +11,38 @@ import Panier from './Panier';
 
 
 
+function get_list_quantite(shoppingList) {
+    let q = 0;
+    let list_quantite = [];
+    let product_compte=false;
+    shoppingList.map((el) => {
+        product_compte=false;
+        shoppingList.map((occ) => {
+            if (occ.prod.id_product == el.prod.id_product) {
+                q++;
 
+            }
+
+        })
+        list_quantite.map((exist)=>{
+            if(exist.prod.id_product== el.prod.id_product){
+                product_compte=true;
+            }
+
+        })
+        if(!product_compte){
+        list_quantite.push({'prod': el.prod, 'qte': q });
+        console.log(list_quantite);
+        }
+        
+        q = 0;
+
+    })
+
+
+    return list_quantite;
+
+}
 
 
 function Menu({ products }) {
@@ -25,7 +56,9 @@ function Menu({ products }) {
 
 
 
-  
+
+
+
     // alert(`selected ${eventKey}`)
     const handleSelect = (eventKey) => {
         switch (eventKey) {
@@ -142,19 +175,30 @@ function Menu({ products }) {
                                     <div className='col-3'>Produit</div>
                                     <div className='col-3'>prix</div>
                                     <div className='col-3'>Quantité</div>
-                                    
+
                                     <div className='col-3'>Vente</div>
                                 </div>
 
 
                                 {(shoppingList.length == 0) ? "Votre panier est vide"
-                                    : shoppingList.map((el) => (
-                                        <div className='row bg-primary mt-2 rounded' rounded>
-                                            <div className='col-3'>{el.prod.name_prod}</div>
-                                            <div className='col-3'>{el.prod.price} €</div>
-                                            <div className='col-3'>{el.prod.quantite}</div>
-                                            {(el.prod.isSpecialOffer === true) && <div className='col-3 badge bg-warning'>Soldes</div>}
-                                        </div>))
+                                    : (
+
+
+                                        // shoppingList.map((el) => (
+                                        // <div className='row bg-primary mt-2 rounded' rounded>
+                                        //     <div className='col-3'>{el.prod.name_prod}</div>
+                                        //     <div className='col-3'>{el.prod.price} €</div>
+                                        //     <div className='col-3'>{el.prod.quantite}</div>
+                                        //     {(el.prod.isSpecialOffer === true) && <div className='col-3 badge bg-warning'>Soldes</div>}
+                                        // </div>)))
+
+                                        (get_list_quantite(shoppingList)).map((el) => (
+                                            <div className='row bg-primary mt-2 rounded' rounded>
+                                                <div className='col-3'>{el.prod.name_prod}</div>
+                                                <div className='col-3'>{el.prod.price} €</div>
+                                                <div className='col-3'>{el.qte}</div>
+                                                {(el.prod.isSpecialOffer === true) && <div className='col-3 badge bg-warning'>Soldes</div>}
+                                            </div>)))
 
 
                                 }

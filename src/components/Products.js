@@ -48,7 +48,7 @@ function Products({ products, shoppingList, setShoppingList, total, setTotal, qu
                                 <Button className='d-flex justify-content-center' bg="light" variant="danger"
                                     onClick={() => {
 
-                                        //console.log(shoppingList);
+                                        console.log(shoppingList);
                                        
                                         shoppingList.push({ 'prod': product, 'qte': 1 });
                                         setShoppingList(shoppingList);

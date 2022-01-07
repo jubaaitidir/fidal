@@ -54,22 +54,7 @@ function Products({ products, shoppingList, setShoppingList, total, setTotal, qu
                                         setShoppingList(shoppingList);
                                         total += product.price;
                                         setTotal(total)
-                                        // } else {
-                                        //     shoppingList.map((el) => {
-                                        //         if (product.id_product == el.prod.id_product) {
-                                        //             el.qte = parseInt(el.qte) + 1;
-                                        //             console.log('id produit cliqué:' + product.id_product + ' id produit trouvé dans shopping list' + el.prod.id_product + ' quantite produit trouve: ' + el.qte);
-                                        //         }else{
-                                        //             shoppingList.push({ 'prod': product, 'qte': 1 });
-                                        //         }
-
-
-
-                                        //     })
-                                        // }
-
-
-                                        //setQuantite(quantite);
+                           
                                         
                                     }}>
                                     commander

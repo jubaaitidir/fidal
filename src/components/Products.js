@@ -19,51 +19,16 @@ function importAll(r) {
     return images;
 }
 
-// function handleClick(prod) {
-//     alert(`je veux acheter le produit ${prod}`);
-//     setShoppingList({prod})
-
-// }
 
 
-// function Example() {
-//     const [show, setShow] = useState(false);
-
-//     const handleClose = () => setShow(false);
-//     const handleShow = () => setShow(true);
-
-//     return (
-//         <>
-//             <Button variant="primary" onClick={handleShow}>
-//                 Launch
-//             </Button>
-
-//             <Offcanvas show={show} onHide={handleClose}>
-//                 <Offcanvas.Header closeButton>
-//                     <Offcanvas.Title>Offcanvas</Offcanvas.Title>
-//                 </Offcanvas.Header>
-//                 <Offcanvas.Body>
-//                     Some text as placeholder. In real life you can have the elements you
-//                     have chosen. Like, text, images, lists, etc.
-//                 </Offcanvas.Body>
-//             </Offcanvas>
-//         </>
-//     );
-// }
-
-// render(<Example />
-// );
-
-
-
-function Products({ products, shoppingList, setShoppingList, total, setTotal}) {
+function Products({ products, shoppingList, setShoppingList, total, setTotal, quantite, setQuantite }) {
     //const [shoppingList, setShoppingList] = useState([]);
     //const { products } = Infos;
     let list_products = products;
     //console.log("****************" + window.location.origin)
     let images = importAll(require.context('../images/', false, /\.(png|jpe?g|svg)$/));
 
- 
+
 
     //console.log(list_products.forEach(el => (console.log(el.img_prod_src))));
     let rows_products = list_products.map((product) => (
@@ -80,7 +45,35 @@ function Products({ products, shoppingList, setShoppingList, total, setTotal}) {
                         </Col>
                         <Col>
                             <Container className='d-flex justify-content-center'>
-                                <Button className='d-flex justify-content-center' bg="light" variant="danger" onClick={() => {shoppingList.push(product);setShoppingList(shoppingList);{total+=product.price} ;setTotal(total)}}>commander</Button>
+                                <Button className='d-flex justify-content-center' bg="light" variant="danger"
+                                    onClick={() => {
+
+                                        //console.log(shoppingList);
+                                       
+                                        shoppingList.push({ 'prod': product, 'qte': 1 });
+                                        setShoppingList(shoppingList);
+                                        total += product.price;
+                                        setTotal(total)
+                                        // } else {
+                                        //     shoppingList.map((el) => {
+                                        //         if (product.id_product == el.prod.id_product) {
+                                        //             el.qte = parseInt(el.qte) + 1;
+                                        //             console.log('id produit cliqué:' + product.id_product + ' id produit trouvé dans shopping list' + el.prod.id_product + ' quantite produit trouve: ' + el.qte);
+                                        //         }else{
+                                        //             shoppingList.push({ 'prod': product, 'qte': 1 });
+                                        //         }
+
+
+
+                                        //     })
+                                        // }
+
+
+                                        //setQuantite(quantite);
+                                        
+                                    }}>
+                                    commander
+                                </Button>
                             </Container>
                         </Col>
 
@@ -95,11 +88,11 @@ function Products({ products, shoppingList, setShoppingList, total, setTotal}) {
                         </Col>
                     </Row>
                 </Container>
-         
+
 
 
             </div>
-        </div>
+        </div >
 
     ));
 

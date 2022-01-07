@@ -20,43 +20,12 @@ function Menu({ products }) {
     const [shoppingList, setShoppingList] = useState([]);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
+    const [quantite, setQuantite] = useState(1);
     const [total, setTotal] = useState(0);
 
 
-    function get_list_prod(shoppingList) {
-        shoppingList.map((el) => (
 
-            setTotal(el.price)
-
-        ))
-        let list_prod = <div className='container-fluid'>
-            {(shoppingList.length == 0) ? "Votre panier est vide"
-                : shoppingList.map((el) => (
-                    <div className='row bg-primary mt-2 rounded' rounded>
-                        <div className='col-4 border-black'>{el.name_prod}</div>
-                        <div className='col-4'>{el.price} euros</div>
-                        {(el.isSpecialOffer === true) && <div className='col-4 badge bg-warning'>Soldes</div>}
-                    </div>))
-
-
-            }
-            <div className='container-fluid bg-danger'>
-
-                <div className='row bg-primary mt-2 rounded' rounded>
-                    <div className='col-4 border-black'>Total:</div>
-                    <div className='col-4'>{total} euros</div>
-
-                </div>
-
-            </div>
-
-        </div>
-        return (list_prod);
-
-
-    }
-
+  
     // alert(`selected ${eventKey}`)
     const handleSelect = (eventKey) => {
         switch (eventKey) {
@@ -84,7 +53,7 @@ function Menu({ products }) {
                 ReactDOM.render(
                     <React.StrictMode>
 
-                        <Products products={products} shoppingList={shoppingList} setShoppingList={setShoppingList} total={total} setTotal={setTotal}/>
+                        <Products products={products} shoppingList={shoppingList} setShoppingList={setShoppingList} total={total} setTotal={setTotal} quantite={quantite} setQuantite={setQuantite} />
 
                     </React.StrictMode>,
                     document.getElementById('main')
@@ -102,15 +71,14 @@ function Menu({ products }) {
                 break;
             }
             case "5": {
-                ReactDOM.render(
-                    <React.StrictMode>
-                        {/* <Panier show={show} setShow={setShow} handleClose={handleClose} shoppingList={shoppingList} setShoppingList={setShoppingList} /> */}
-                        <Products products={products} shoppingList={shoppingList} setShoppingList={setShoppingList} total={total} setTotal={setTotal} />
+                // ReactDOM.render(
+                //     <React.StrictMode>
+                //       <Products products={products} shoppingList={shoppingList} setShoppingList={setShoppingList} total={total} setTotal={setTotal} />
 
 
-                    </React.StrictMode>,
-                    document.getElementById('main')
-                );
+                //     </React.StrictMode>,
+                //     document.getElementById('main')
+                // );
                 break;
             }
 
@@ -166,26 +134,35 @@ function Menu({ products }) {
                         </Offcanvas.Header>
                         <Offcanvas.Body>
 
-                          
+
 
                             <div className='container-fluid'>
+
+                                <div className='row bg-primary mt-2 rounded bg-warning'>
+                                    <div className='col-3'>Produit</div>
+                                    <div className='col-3'>prix</div>
+                                    <div className='col-3'>Quantité</div>
+                                    
+                                    <div className='col-3'>Vente</div>
+                                </div>
+
+
                                 {(shoppingList.length == 0) ? "Votre panier est vide"
                                     : shoppingList.map((el) => (
                                         <div className='row bg-primary mt-2 rounded' rounded>
-                                            <div className='col-4 border-black'>{el.name_prod}</div>
-                                            <div className='col-4'>{ el.price} euros</div>
-                                            {(el.isSpecialOffer === true) && <div className='col-4 badge bg-warning'>Soldes</div>}
+                                            <div className='col-3'>{el.prod.name_prod}</div>
+                                            <div className='col-3'>{el.prod.price} €</div>
+                                            <div className='col-3'>{el.prod.quantite}</div>
+                                            {(el.prod.isSpecialOffer === true) && <div className='col-3 badge bg-warning'>Soldes</div>}
                                         </div>))
 
 
                                 }
-                                <div className='container-fluid bg-danger'>
 
-                                    <div className='row bg-primary mt-2 rounded' rounded>
-                                        <div className='col-4 border-black'>Total:</div>
-                                        <div className='col-4'>{total} euros</div>
 
-                                    </div>
+                                <div className='row bg-warning mt-2 rounded h4 justify-content-center' rounded>
+                                    <div className='col-6'>Total </div>
+                                    <div className='col-6'>{total} €</div>
 
                                 </div>
 
@@ -193,7 +170,7 @@ function Menu({ products }) {
 
 
 
-                            
+
 
                         </Offcanvas.Body>
                     </Offcanvas>

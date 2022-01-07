@@ -6,6 +6,7 @@ import Banner from './Banner';
 import Menu from './Menu';
 import Footer from './Footer';
 import Infos from './Infos';
+import Home from './Home';
 // const Banner = lazy(() => import("./Banner"));
 function App() {
 
@@ -21,7 +22,7 @@ function App() {
 
       
         <div className="align-items-center text-center App-body" id="main">
-
+          <Home products={Infos.products}/>
         </div>
      
       <footer className="App-header" id="footer">

@@ -5,7 +5,7 @@ import { Button, Navbar, Nav, NavDropdown, Container, Row, Col } from 'react-boo
 
 const Footer = () => {
     return (
-    <Container className="flex-center" bg="dark" variant="dark">
+    <Container className="flex-center bg-warning">
         <Row>
             <Col className='md-col-4'>
                 Liens

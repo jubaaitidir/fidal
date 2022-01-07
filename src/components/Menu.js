@@ -12,20 +12,7 @@ import Panier from './Panier';
 
 
 
-function get_list_prod(shoppingList) {
-    const list_shopping = shoppingList;
-    const list_prod = list_shopping.map((el) => {
 
-        <h2>{el.name_prod}</h2>
-
-        console.log(el);
-    })
-    console.log(list_prod);
-    console.log(list_shopping);
-    return (<Container>{list_prod}</Container>);
-
-
-}
 
 function Menu({ products }) {
     // const { products } = Infos;
@@ -34,6 +21,41 @@ function Menu({ products }) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const [total, setTotal] = useState(0);
+
+
+    function get_list_prod(shoppingList) {
+        shoppingList.map((el) => (
+
+            setTotal(el.price)
+
+        ))
+        let list_prod = <div className='container-fluid'>
+            {(shoppingList.length == 0) ? "Votre panier est vide"
+                : shoppingList.map((el) => (
+                    <div className='row bg-primary mt-2 rounded' rounded>
+                        <div className='col-4 border-black'>{el.name_prod}</div>
+                        <div className='col-4'>{el.price} euros</div>
+                        {(el.isSpecialOffer === true) && <div className='col-4 badge bg-warning'>Soldes</div>}
+                    </div>))
+
+
+            }
+            <div className='container-fluid bg-danger'>
+
+                <div className='row bg-primary mt-2 rounded' rounded>
+                    <div className='col-4 border-black'>Total:</div>
+                    <div className='col-4'>{total} euros</div>
+
+                </div>
+
+            </div>
+
+        </div>
+        return (list_prod);
+
+
+    }
 
     // alert(`selected ${eventKey}`)
     const handleSelect = (eventKey) => {
@@ -62,7 +84,7 @@ function Menu({ products }) {
                 ReactDOM.render(
                     <React.StrictMode>
 
-                        <Products products={products} shoppingList={shoppingList} setShoppingList={setShoppingList} />
+                        <Products products={products} shoppingList={shoppingList} setShoppingList={setShoppingList} total={total} setTotal={setTotal}/>
 
                     </React.StrictMode>,
                     document.getElementById('main')
@@ -82,7 +104,8 @@ function Menu({ products }) {
             case "5": {
                 ReactDOM.render(
                     <React.StrictMode>
-                        <Panier show={show} setShow={setShow} handleClose={handleClose} shoppingList={shoppingList} setShoppingList={setShoppingList} />
+                        {/* <Panier show={show} setShow={setShow} handleClose={handleClose} shoppingList={shoppingList} setShoppingList={setShoppingList} /> */}
+                        <Products products={products} shoppingList={shoppingList} setShoppingList={setShoppingList} total={total} setTotal={setTotal} />
 
 
                     </React.StrictMode>,
@@ -96,7 +119,7 @@ function Menu({ products }) {
     };
 
     return (
-        <Navbar bg="primary" expand='lg' variant="blue" activeKey="1" onSelect={handleSelect} >
+        <Navbar className='navbar-expand-lg' bg="primary" expand='lg' variant="blue" activeKey="1" onSelect={handleSelect} >
             <Container fluid>
                 <Navbar.Brand href="#home" style={{ color: 'red' }}>
                     <img
@@ -142,14 +165,35 @@ function Menu({ products }) {
                             <Offcanvas.Title>Panier</Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
-                            <div className='container-fluid'>{(shoppingList.length == 0) ? "Votre panier est vide"
-                                : shoppingList.map((el) =>
-                                    <div className='row bg-primary mt-2'>
-                                        <div className='col-4 border-black'>{el.name_prod}</div>
-                                        <div  className='col-4'>{el.price} euros</div>
-                                        <div  className='col-4 badge bg-warning'>{(el.isSpecialOffer === true) && "Soldes"} </div>
-                                    </div>)}
+
+                          
+
+                            <div className='container-fluid'>
+                                {(shoppingList.length == 0) ? "Votre panier est vide"
+                                    : shoppingList.map((el) => (
+                                        <div className='row bg-primary mt-2 rounded' rounded>
+                                            <div className='col-4 border-black'>{el.name_prod}</div>
+                                            <div className='col-4'>{ el.price} euros</div>
+                                            {(el.isSpecialOffer === true) && <div className='col-4 badge bg-warning'>Soldes</div>}
+                                        </div>))
+
+
+                                }
+                                <div className='container-fluid bg-danger'>
+
+                                    <div className='row bg-primary mt-2 rounded' rounded>
+                                        <div className='col-4 border-black'>Total:</div>
+                                        <div className='col-4'>{total} euros</div>
+
+                                    </div>
+
+                                </div>
+
                             </div>
+
+
+
+                            
 
                         </Offcanvas.Body>
                     </Offcanvas>
@@ -164,6 +208,11 @@ function Menu({ products }) {
                 <NavDropdown.Item eventKey="4.4">Separated link</NavDropdown.Item>
             </NavDropdown> */}
             {'   '}
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form></div>
         </Navbar>
     );
 }

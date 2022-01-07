@@ -56,7 +56,7 @@ function importAll(r) {
 
 
 
-function Products({ products, shoppingList, setShoppingList}) {
+function Products({ products, shoppingList, setShoppingList, total, setTotal}) {
     //const [shoppingList, setShoppingList] = useState([]);
     //const { products } = Infos;
     let list_products = products;
@@ -80,7 +80,7 @@ function Products({ products, shoppingList, setShoppingList}) {
                         </Col>
                         <Col>
                             <Container className='d-flex justify-content-center'>
-                                <Button className='d-flex justify-content-center' bg="light" variant="danger" onClick={() => {shoppingList.push(product);setShoppingList(shoppingList); console.log(shoppingList)}}>commander</Button>
+                                <Button className='d-flex justify-content-center' bg="light" variant="danger" onClick={() => {shoppingList.push(product);setShoppingList(shoppingList);{total+=product.price} ;setTotal(total)}}>commander</Button>
                             </Container>
                         </Col>
 

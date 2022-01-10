@@ -13,7 +13,7 @@ function Home({products}) {
         <div className='col md-flex justify-content-center'>
 
             <Banner />
-            <Products products={products}/>
+            {/* <Products products={products}/> */}
 
         </div>
     );

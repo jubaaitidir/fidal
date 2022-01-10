@@ -21,7 +21,7 @@ function importAll(r) {
 
 
 
-function Products({ products, shoppingList, setShoppingList, total, setTotal, quantite, setQuantite }) {
+function Products({ products, shoppingList, setShoppingList, total, setTotal, quantite, setQuantite, qteTotal, setQteTotal }) {
     //const [shoppingList, setShoppingList] = useState([]);
     //const { products } = Infos;
     let list_products = products;
@@ -33,44 +33,49 @@ function Products({ products, shoppingList, setShoppingList, total, setTotal, qu
     //console.log(list_products.forEach(el => (console.log(el.img_prod_src))));
     let rows_products = list_products.map((product) => (
         <div className='row justify-content-center' >
-            <div className='col-lg-6'>
-                <Container className='border border-primary rounded mt-2' fluid>
-                    <Row className='mt-2'>
-                        <Image className='mt-2' src={images[product.img_prod_src].default} alt="" fluid rounded />
+            <div className='fluid col-12 col-sm-12 col-md-8 col-lg-6'>
+                <Container className='fluid border border-danger rounded m-0 mt-1' >
+                    <Row className='fluid '>
+                        <img className='img-fluid m-2 rounded' src={images[product.img_prod_src].default} alt="" />
                     </Row>
-                    <Row className='mt-2'>
+                    <Row className='fluid mt-2'>
                         <Col >
                             <h4>{product.name_prod}</h4>
                             <p>{product.description}</p>
                         </Col>
                         <Col>
                             <Container className='d-flex justify-content-center'>
-                                <Button className='d-flex justify-content-center' bg="light" variant="danger"
+                                <Button className='d-flex text-danger justify-content-center border border-danger bg-white rounded'
                                     onClick={() => {
 
                                         console.log(shoppingList);
-                                       
+
                                         shoppingList.push({ 'prod': product, 'qte': 1 });
                                         setShoppingList(shoppingList);
                                         total += product.price;
-                                        setTotal(total)
-                           
-                                        
+                                        setTotal(total);
+                                        qteTotal+=1;
+                                        setQteTotal(qteTotal);
+
+
                                     }}>
-                                    commander
+                                    Ajouter au panier
                                 </Button>
                             </Container>
                         </Col>
 
                     </Row>
 
-                    <Row className='mt-2'>
+                    <Row className='d-flex justify-content-center m-2 bg-warning rounded'>
                         <Col>
-                            <h3 className="d-flex justify-content-center" >{product.price} euros</h3>
+                            
+                            <h3 className=" text-white bold" >Prix: {product.price} €</h3>
                         </Col>
-                        <Col>
-                            <span class="badge bg-warning rounded-pill">{product.isSpecialOffer && "SOLDES"}</span>
-                        </Col>
+                        {product.isSpecialOffer && <Col>
+                            <span class="text-white fond-weight-bold"> SOLDES </span>
+                        </Col>}
+                        
+
                     </Row>
                 </Container>
 
@@ -82,7 +87,7 @@ function Products({ products, shoppingList, setShoppingList, total, setTotal, qu
     ));
 
     return (
-        <Container className="justify-content-center" rounded >
+        <Container className="justify-content-center " rounded >
             <h1 className="d-flex justify-content-center" > Nos produits </h1>
             {rows_products}
         </Container>

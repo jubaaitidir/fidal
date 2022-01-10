@@ -17,11 +17,11 @@ function App() {
 
 
       <header className="App-header" id="header">
-        <Menu products={Infos.products} />
+        <Menu className=''products={Infos.products} />
       </header>
 
       
-        <div className="align-items-center text-center App-body" id="main">
+        <div className="align-items-center text-center App-body" id="main" style={{'padding-top':'200px'}}>
           <Home products={Infos.products}/>
         </div>
      

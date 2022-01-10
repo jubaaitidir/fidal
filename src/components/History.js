@@ -19,8 +19,8 @@ function History() {
                 <Col xs lg="6" className='border border-blue' fluid rounded>
 
                     <Image src={fidal_joacquime} width='200' fluid roundedCircle />
-                    <h1>{hist.title}</h1>
-                    <h3>{hist.description}</h3>
+                    <h1 className='font-weight-bold font-italic'>{hist.title}</h1>
+                    <h4>{hist.description}</h4>
                     <i>{hist.author}</i>
                 </Col>
 

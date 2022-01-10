@@ -24,10 +24,22 @@ function Vitrine() {
 
     return (
         // style={{ width: '100%', color: 'red'}}
-        <Container className='md-flex center' lg={6} fluid>
+        <Container className='md-flex justify-content-center' fluid>
             <Row>
-                <Col >
-                    <Card className='text-center' fluid rounded>
+                <Col className='text-center col-12 col-sm-12 col-md-4 col-lg-6'>
+                   
+
+
+                        {/* <div style={{ display: 'Block', justifyContent: 'space-between', textAlign: 'center' }} > */}
+                            <h1 style={{ color: 'red', fontFamily: 'cursive' }}>{Infos.title.toUpperCase()}</h1>
+                            <h3 className="text-muted" style={{ fontStyle: 'italic', fontFamily: 'cursive' }}>{Infos.description.toUpperCase()}</h3>
+                            <p>
+                                {Infos.adress}
+                            </p>
+
+                        {/* </div> */}
+                   
+                    {/* <Card className='text-center' fluid rounded>
 
 
                         <Card.Body style={{ display: 'Block', justifyContent: 'space-between', textAlign: 'center' }} >
@@ -38,12 +50,10 @@ function Vitrine() {
                             </Card.Text>
 
                         </Card.Body>
-                    </Card>
+                    </Card> */}
                 </Col>
-            </Row>
-
-            <Row className='d-flex justify-content-center' fluid rounded>
-                <Col lg={8}>
+       
+                <Col className='col-12 col-sm-12 col-md-8 col-lg-6'>
                     <Image src={vitrine} fluid rounded />
                 </Col>
             </Row>
@@ -54,9 +64,9 @@ function Vitrine() {
 
 function Banner() {
     return (<>
-        
-            <Vitrine />
-  
+
+        <Vitrine />
+
 
     </>
     );

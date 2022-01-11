@@ -1,4 +1,4 @@
-import React,{Suspense, lazy} from 'react';
+import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
 //import './index.css';
 //import App from './components/App';
@@ -7,9 +7,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Products from './components/Products';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
+import App from "./components/App";
 
-
-const App = lazy(() => import("./components/App"));
+//const App = lazy(() => import("./components/App"));
 
 
 ReactDOM.render(
@@ -19,13 +19,13 @@ ReactDOM.render(
 
   <React.StrictMode>
 
-    <Suspense fallback={<h2>Chargement des données...</h2>}>
+    {/* <Suspense fallback={<h2> Chargement des données... </h2>}> */}
       <App />
-      
-    </Suspense>
-       
+    {/* </Suspense> */}
 
-  </React.StrictMode>,
+
+
+  </React.StrictMode >,
   document.getElementById('root')
 );
 

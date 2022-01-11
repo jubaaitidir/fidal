@@ -15,12 +15,7 @@ import vitrine from '../images/vitrine.jpg';
 // }
 
 function Vitrine() {
-    let count = 0;
-    for (let i = 1; i < 2000; i++) {
-
-        count += Math.log10(i);
-        console.log(count);
-    }
+ 
 
     return (
         // style={{ width: '100%', color: 'red'}}

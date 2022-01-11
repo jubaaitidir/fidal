@@ -1,4 +1,5 @@
 import React, { Component, Suspense, lazy } from 'react';
+import { Spinner } from 'react-bootstrap';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 //import './App.css';
@@ -7,7 +8,7 @@ import Menu from './Menu';
 import Footer from './Footer';
 import Infos from './Infos';
 import Home from './Home';
-// const Banner = lazy(() => import("./Banner"));
+
 function App() {
 
   return (
@@ -17,15 +18,21 @@ function App() {
 
 
       <header className="App-header" id="header">
-        <Menu className=''products={Infos.products} />
+
+        <Menu products={Infos.products} />
+
       </header>
 
-      
-        <div className="align-items-center text-center App-body" id="main" style={{'padding-top':'200px'}}>
-          <Home products={Infos.products}/>
-        </div>
-     
-      <footer className="App-header" id="footer">
+
+      <div className="align-items-center text-center App-body" id="main" style={{ 'padding-top': '150px' }}>
+   
+        <Home products={Infos.products} />
+
+      </div>
+
+
+
+      <footer id="footer" className="App-header fixed-bottom col-12 justify-content-center text-center bg-warning p-3" >
         <Footer />
       </footer>
 

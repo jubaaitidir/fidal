@@ -5,7 +5,7 @@ import { Button, Navbar, Nav, NavDropdown, Container, Row, Col } from 'react-boo
 
 const Footer = () => {
     return (
-    <Container className="flex-center bg-warning">
+    <Container className="flex-center">
         <Row>
             <Col className='md-col-4'>
                 Liens

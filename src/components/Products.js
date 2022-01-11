@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import { Container, Image, Row, Col, Button } from 'react-bootstrap';
+import { Container, Image, Row, Col, Button, Card, ListGroupItem, ListGroup } from 'react-bootstrap';
 import { ReactDOM } from 'react';
 
 //import chaussures from '../images/chaussures_cuire.jpg';
@@ -22,9 +22,9 @@ function importAll(r) {
 
 
 function Products({ products, shoppingList, setShoppingList, total, setTotal, quantite, setQuantite, qteTotal, setQteTotal }) {
-  
+
     let list_products = products;
-   
+
     let images = importAll(require.context('../images/', false, /\.(png|jpe?g|svg)$/));
 
     let count = 0;
@@ -34,11 +34,54 @@ function Products({ products, shoppingList, setShoppingList, total, setTotal, qu
         console.log(count);
     }
 
-    
+
     let rows_products = list_products.map((product) => (
         <div className='row justify-content-center mt-2 fluid' >
             <div className='fluid col-12 col-sm-12 col-md-8 col-lg-6 mt-2 m0'>
-                <Container className='fluid m-0 shadow rounded' >
+                <Card className='justify-content-center shadow' style={{ width: '' }} >
+                    <Card.Img variant="top" src={images[product.img_prod_src].default} />
+                    <Card.Body>
+                        <Card.Title>{product.name_prod}</Card.Title>
+                        <Card.Text>
+                            <p>{product.description}</p>
+                        </Card.Text>
+                    </Card.Body>
+
+                    <Card.Body >
+                        <Button className='text-danger justify-content-center border border-danger bg-white rounded'
+                            onClick={() => {
+
+                                console.log(shoppingList);
+
+                                shoppingList.push({ 'prod': product, 'qte': 1 });
+                                setShoppingList(shoppingList);
+                                total += product.price;
+                                setTotal(total);
+                                qteTotal += 1;
+                                setQteTotal(qteTotal);
+
+
+                            }}>
+                            Ajouter au panier
+                        </Button>
+                        <Container>
+                            <Row className='d-flex justify-content-center m-2 bg-warning fluid rounded'>
+                                <Col>
+
+                                    <h3 className=" text-white bold" >Prix: {product.price} €</h3>
+                                </Col>
+                                {product.isSpecialOffer && <Col className='fluid'>
+                                    <span class="text-white fond-weight-bold"> SOLDES </span>
+                                </Col>}
+
+
+                            </Row>
+                        </Container>
+
+                    </Card.Body>
+                </Card>
+
+                {/* <Container className='fluid m-0 shadow rounded' >
                     <Row className='fluid '>
                         <Image className='fluid m-0 rounded' src={images[product.img_prod_src].default} alt="" />
                     </Row>
@@ -81,7 +124,7 @@ function Products({ products, shoppingList, setShoppingList, total, setTotal, qu
                         
 
                     </Row>
-                </Container>
+                </Container> */}
 
 
 

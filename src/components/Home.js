@@ -10,11 +10,13 @@ function Home({products}) {
 
 
     return (
-        <div className='col md-flex justify-content-center'>
+        <div className='row justify-content-center mt-3'>
+        <div className='col md-flex '>
 
             <Banner />
             {/* <Products products={products}/> */}
 
+        </div>
         </div>
     );
 }

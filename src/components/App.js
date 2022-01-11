@@ -32,7 +32,7 @@ function App() {
 
 
 
-      <footer id="footer" className="App-header fixed-bottom col-12 justify-content-center text-center bg-warning p-3" >
+      <footer id="footer" className="App-header my-0 col-12 justify-content-center text-center bg-warning p-3" >
         <Footer />
       </footer>
 

@@ -45,9 +45,7 @@ function Products({ products, shoppingList, setShoppingList, total, setTotal, qu
                         <Card.Text>
                             <p>{product.description}</p>
                         </Card.Text>
-                    </Card.Body>
-
-                    <Card.Body >
+                 
                         <Button className='text-danger justify-content-center border border-danger bg-white rounded'
                             onClick={() => {
 
@@ -59,6 +57,7 @@ function Products({ products, shoppingList, setShoppingList, total, setTotal, qu
                                 setTotal(total);
                                 qteTotal += 1;
                                 setQteTotal(qteTotal);
+                                alert(`1 produit est ajouté dans le panier , vous avez ${qteTotal} produits en attente`);
 
 
                             }}>

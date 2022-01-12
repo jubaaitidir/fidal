@@ -24,7 +24,7 @@ function App() {
       </header>
 
 
-      <div className="align-items-center text-center App-body" id="main" style={{ 'padding-top': '150px' }}>
+      <div className="align-items-center text-center App-body" id="main" style={{ 'padding-top':'85px'}}>
    
         <Home products={Infos.products} />
 

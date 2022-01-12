@@ -3,6 +3,8 @@ import React, { Suspense } from 'react';
 import Infos from "./Infos";
 import { Card, Container, Row, Col, Image, Carousel } from 'react-bootstrap';
 import vitrine from '../images/vitrine.jpg';
+import { Button } from 'bootstrap';
+import { Player } from 'video-react';
 
 //import {products} from './Products';
 
@@ -32,14 +34,36 @@ function Vitrine() {
     let products = Infos.products;
     let images = importAll(require.context('../images/', false, /\.(png|jpe?g|svg)$/));
 
-    return (
-        // style={{ width: '100%', color: 'red'}}
-        <Container className='fluid justify-content-center mt-2 py2' style={{'marginBottom': '2em'}} fluid>
+    return (<Container>
+
+        <div class="jumbotron jumbotron-fluid bg-danger">
+            <div class="container">
+                <h1 class="display-3">Fidal</h1>
+
+                <hr class="my-2" />
+                <p>Cordonnerie de la ville de Garches</p>
+                <p class="lead">
+                    <a class="btn  btn-md" href="Jumbo action link" role="button"><i class="fa fa-address-book" aria-hidden="true">adresse : </i>{Infos.adress}</a>
+                </p>
+
+            </div>
+        </div>
+        <Container className='fluid' fluid>
+            <Row>
+                <Col className='col-6'>
+                    {/* <Player className='' style={{'height':'200px', 'width':'400px'}}>
+                        <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+                    </Player> */}
+                </Col>
+            </Row>
+        </Container>
+
+        <Container className='fluid justify-content-center mt-2 py2' style={{ 'marginBottom': '2em' }} fluid>
             <Row className='justify-content-center mt-2' >
                 <Col className='text-center col-12 col-sm-12 col-md-4 col-lg-6 mt-2 shadow text-white bg-warning'>
 
                     <h1 style={{ color: 'red', fontFamily: 'cursive' }}>{Infos.title.toUpperCase()}</h1>
-                    <span className="text-muted" style={{ fontStyle: 'italic', fontFamily: 'cursive', fontSize:'1.0rem'}}>{Infos.description.toUpperCase()}</span>
+                    <span className="text-muted" style={{ fontStyle: 'italic', fontFamily: 'cursive', fontSize: '1.0rem' }}>{Infos.description.toUpperCase()}</span>
                     <p>
                         {Infos.adress}
                     </p>
@@ -49,9 +73,9 @@ function Vitrine() {
 
                 <Col className='col-12 col-sm-12 col-md-8 col-lg-8 mt-2 shadow '>
                     {/* <Image src={vitrine} fluid rounded /> */}
-                
+
                     <Carousel >
-                    {/* <Carousel.Item>
+                        {/* <Carousel.Item>
                             <img
                                 className="d-block w-100 fluid"
                                 src={vitrine}
@@ -66,21 +90,21 @@ function Vitrine() {
 
                             </Carousel.Caption>
                         </Carousel.Item> */}
-                    {products.map((prod) => (
-                        <Carousel.Item>
-                            <img
-                                className="d-block w-100"
-                                style={{'max-height':'45vh'}}
-                                src={images[prod.img_prod_src].default}
-                                alt="First slide"
-                            />
-                            <Carousel.Caption>
-                                <h3 style={{color: 'red', fontFamily: 'cursive'}}>{prod.name_prod}</h3>
-                                <h4>{prod.description}</h4>
-                                
+                        {products.map((prod) => (
+                            <Carousel.Item>
+                                <img
+                                    className="d-block w-100"
+                                    style={{ 'max-height': '45vh' }}
+                                    src={images[prod.img_prod_src].default}
+                                    alt="First slide"
+                                />
+                                <Carousel.Caption>
+                                    <h3 style={{ color: 'red', fontFamily: 'cursive' }}>{prod.name_prod}</h3>
+                                    <h4>{prod.description}</h4>
 
-                            </Carousel.Caption>
-                        </Carousel.Item>))}
+
+                                </Carousel.Caption>
+                            </Carousel.Item>))}
                         {/* <Carousel.Item>
                             <img
                                 className="d-block w-100"
@@ -111,6 +135,7 @@ function Vitrine() {
             </Row>
 
         </Container>
+    </Container>
     );
 }
 

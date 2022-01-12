@@ -41,10 +41,10 @@ function Vitrine() {
                 <h1 class="display-3">Fidal</h1>
 
                 <hr class="my-2" />
-                <p>Cordonnerie de la ville de Garches</p>
-                <p class="lead">
-                    <a class="btn  btn-md" href="Jumbo action link" role="button"><i class="fa fa-address-book" aria-hidden="true">adresse : </i>{Infos.adress}</a>
-                </p>
+                <h2 class="display-4">Cordonnerie de la ville de Garches</h2>
+
+                <h1 class="btn  btn-md display-4 text-white" role="button"><i class="fa fa-address-book" aria-hidden="true">adresse : </i>{Infos.adress}</h1>
+
 
             </div>
         </div>
@@ -60,7 +60,7 @@ function Vitrine() {
 
         <Container className='fluid justify-content-center mt-2 py2' style={{ 'marginBottom': '2em' }} fluid>
             <Row className='justify-content-center mt-2' >
-                <Col className='text-center col-12 col-sm-12 col-md-4 col-lg-6 mt-2 shadow text-white bg-warning'>
+                {/* <Col className='text-center col-12 col-sm-12 col-md-4 col-lg-6 mt-2 shadow text-white bg-warning'>
 
                     <h1 style={{ color: 'red', fontFamily: 'cursive' }}>{Infos.title.toUpperCase()}</h1>
                     <span className="text-muted" style={{ fontStyle: 'italic', fontFamily: 'cursive', fontSize: '1.0rem' }}>{Infos.description.toUpperCase()}</span>
@@ -69,7 +69,7 @@ function Vitrine() {
                     </p>
 
 
-                </Col>
+                </Col> */}
 
                 <Col className='col-12 col-sm-12 col-md-8 col-lg-8 mt-2 shadow '>
                     {/* <Image src={vitrine} fluid rounded /> */}

@@ -2,6 +2,13 @@ import React, { Component, useState } from 'react';
 import { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
 import { Button, Navbar, Nav, NavDropdown, Container, Offcanvas, Spinner, FormControl, Form } from 'react-bootstrap';
+import {
+    BrowserRouter,
+    Route,
+    useParams,
+    Routes
+  } from "react-router-dom";
+
 import logo from '../images/logo.png';
 //import chaussures from './chaussures.jpg'
 //import Products from './Products';
@@ -10,6 +17,7 @@ import Team from './Team';
 import History from './History';
 import Home from './Home';
 import Panier from './Panier';
+import Products from './Products';
 
 
 
@@ -51,7 +59,7 @@ function get_list_quantite(shoppingList) {
 }
 
 
-function Menu({ products }) {
+function Menu({ products, icons }) {
 
     // const { products } = Infos;
     const [show, setShow] = useState(false);
@@ -63,11 +71,28 @@ function Menu({ products }) {
     const [qteTotal, setQteTotal] = useState(0);
     let qteSoldes = 0;
 
+    const clearBasket = () => {
+        setQteTotal(0);
+        setTotal(0);
+        setQuantite(0);
+        console.log(`shopping list before clean panier ${shoppingList}`);
+        shoppingList.map((el) => {
+            console.log(el.prod + ' ' + el.qte)
+        })
+        shoppingList.length = 0;
+        setShoppingList(shoppingList);
+        console.log(`shopping list after clean panier ${shoppingList}`);
+        console.log(`shopping list after clean panier`);
+        shoppingList.map((el) => {
+            console.log(el.prod + ' ' + el.qte)
+        })
+        console.log(`nombre de produits dans le panier ${qteTotal}`);
+       
+    };
 
 
 
-
-    // alert(`selected ${eventKey}`)
+ 
     const handleSelect = (eventKey) => {
         const Products = lazy(() => import("./Products"));
 
@@ -86,6 +111,15 @@ function Menu({ products }) {
                 ReactDOM.render(
                     <React.StrictMode>
                         <History />
+                        {/* <BrowserRouter>
+
+                            <Routes>
+
+                                <Route path='/History' element={<History/>} />
+
+                            </Routes>
+
+                        </BrowserRouter> */}
 
                     </React.StrictMode>,
                     document.getElementById('main')
@@ -147,7 +181,8 @@ function Menu({ products }) {
     };
 
     return (<>
-        <Navbar className='d-flex justify-content-center'collapseOnSelect fixed='top' expand="md" style={{ backgroundColor: "#D32F2F" }} variant="dark" onSelect={handleSelect}>
+
+        <Navbar className='d-flex justify-content-center' collapseOnSelect fixed='top' expand="md" style={{ backgroundColor: "#D32F2F" }} variant="dark" onSelect={handleSelect}>
             <Navbar.Brand href="/Home">
                 <logo
                     alt=""
@@ -169,7 +204,7 @@ function Menu({ products }) {
 
             <Nav.Link eventKey="5" title="équipe"  >
                 <Button className='border border-warning text-warning bg-white border-none' onClick={handleShow}>
-                    Panier <span className='badge bg-warning text-danger text-weight-bolder'>{qteTotal}</span>
+                    Panier {((qteTotal == 0) ? <icons.BsBasket3 /> : <icons.BsBasket3Fill />)} <span className='badge bg-warning text-danger text-weight-bolder'>{qteTotal}</span>
                 </Button>
                 <Offcanvas show={show} onHide={handleClose}>
                     <Offcanvas.Header className='col-12 text-white justify-content-center text-center bg-danger' closeButton>
@@ -190,7 +225,10 @@ function Menu({ products }) {
                             </div>
 
 
-                            {(shoppingList.length == 0) ? "Votre panier est vide"
+                            {(shoppingList.length == 0)
+                                ? (<div className='row bg-primary mt-2 text-weight-bold align-items-center rounded' rounded>
+                                    <div className='col-12 text-center'>Votre panier est vide</div>
+                                </div>)
                                 : (
 
 
@@ -203,7 +241,9 @@ function Menu({ products }) {
                                             <div className='col-3 text-center bg-warning'>{el.prod.price} €</div>
                                             <div className='col-3 text-center'>{el.qte}</div>
                                             {(el.prod.isSpecialOffer === true) && (qteSoldes++, <div className='col-3 badge bg-warning text-center'>Soldes</div>)}
-                                        </div>)))
+                                        </div>)
+                                    )
+                                )
 
 
                             }
@@ -221,8 +261,14 @@ function Menu({ products }) {
                                 }) ? <div className='col-3 text-center h5'>{qteSoldes} Soldes</div> : <div className='col-3 text-center'>O SOLDES</div>}
 
                             </div>
+                            <div className='row mt-2 rounded ' rounded>
+                                <div className='col-12 text-center h4'>
+                                    <Button className='bg-danger border border-danger' onClick={clearBasket} >Vider le panier</Button>
+                                </div>
+                            </div>
 
                         </div>
+
 
 
 
@@ -237,8 +283,8 @@ function Menu({ products }) {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className=" mr-auto justify-content-end">
-                    <Nav.Link eventKey="1" route='/Home' className='text-center text-weight-bold'>Home</Nav.Link>
-                    <Nav.Link eventKey="2" route='/History' className='text-center'>history</Nav.Link>
+                    <Nav.Link eventKey="1"  className='text-center text-weight-bold'>Home</Nav.Link>
+                    <Nav.Link eventKey="2"  className='text-center'>History</Nav.Link>
                     {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                         <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.2">
@@ -252,10 +298,10 @@ function Menu({ products }) {
                     </NavDropdown> */}
 
 
-                    <Nav.Link className='text-center' eventKey="3" title="produits">
+                    <Nav.Link className='text-center' eventKey="3"  title="produits">
                         Produits
                     </Nav.Link>
-                    <Nav.Link className='text-center' eventKey="4" title="équipe">
+                    <Nav.Link className='text-center' eventKey="4"  title="équipe">
                         Team
                     </Nav.Link>
 
@@ -272,108 +318,7 @@ function Menu({ products }) {
 
 export default Menu;
 
-{/*<Navbar collapseOnSelect expand="md" fixed="top" bg="primary" variant="blue" activeKey="1" onSelect={handleSelect} >
-<Container fluid>
-    <Navbar.Brand href="#home" style={{ color: 'red' }}>
-        <img
-            alt="ma chaussure"
-            src={logo}
-            width="50px"
-            height="50px"
-            className="App-logo"
-        />{' '}
-        FIDAL CORDONNERIE
-    </Navbar.Brand>
-</Container>
 
-<Nav.Item className='md-6'>
-    <Nav.Link eventKey="1" title="home" style={{ color: 'white', backgroundColor: 'Highlight' }}>
-        Home
-    </Nav.Link>
-</Nav.Item>
-<Nav.Item className='md-6'>
-    <Nav.Link eventKey="2" title="histoire" style={{ color: 'white' }}>
-        Histoire
-    </Nav.Link>
-</Nav.Item>
-<Nav.Item className='md-6'>
-    <Nav.Link eventKey="3" title="produits" style={{ color: 'white' }}>
-        Produits
-    </Nav.Link>
-</Nav.Item>
-<Nav.Item className='md-6'>
-    <Nav.Link eventKey="4" title="Equipe" style={{ color: 'white' }} >
-        Equipe
-    </Nav.Link>
-</Nav.Item>
-
- <Nav.Item className='md-6' rounded>
-    <Nav.Link eventKey="5" title="panier" style={{ color: 'white', borderRadius: '5px' }} >
-        <Button variant="warning" onClick={handleShow}>
-            Panier {qteTotal}
-        </Button>
-        <Offcanvas show={show} onHide={handleClose}>
-            <Offcanvas.Header className='col-12 text-white justify-content-center text-center bg-danger' closeButton>
-                <Offcanvas.Title>Panier  </Offcanvas.Title>
-            </Offcanvas.Header>
-            <Offcanvas.Body>
-
-
-
-                <div className='container-fluid justify-content-center text-white text-weight-bold'>
-
-                    <div className='row bg-primary mt-2 rounded bg-warning'>
-                        <div className='col-3 text-center'>Produit</div>
-                        <div className='col-3 text-center'>prix</div>
-                        <div className='col-3 text-center'>Quantité</div>
-
-                        <div className='col-3 text-center'>Vente</div>
-                    </div>
-
-
-                    {(shoppingList.length == 0) ? "Votre panier est vide"
-                        : (
-
-
-
-                            get_list_quantite(shoppingList).map((el) => (
-                                //qteTotal += el.qte,
-
-                                <div className='row bg-primary mt-2 text-weight-bold rounded' rounded>
-                                    <div className='col-3 text-center'>{el.prod.name_prod}</div>
-                                    <div className='col-3 text-center bg-warning'>{el.prod.price} €</div>
-                                    <div className='col-3 text-center'>{el.qte}</div>
-                                    {(el.prod.isSpecialOffer === true) && (qteSoldes++, <div className='col-3 badge bg-warning text-center'>Soldes</div>)}
-                                </div>)))
-
-
-                    }
-
-
-                    <div className='row bg-warning mt-2 rounded ' rounded>
-                        <div className='col-3 text-center h4'>{("total").toUpperCase()} </div>
-                        <div className='col-3 text-center h4'>{total} €</div>
-                        <div className='col-3 text-center h4'>{qteTotal}</div>
-                        {get_list_quantite(shoppingList).map((el) => {
-                            if (el.prod.isSpecialOffer) {
-                                qteSoldes += el.qte;
-                            }
-
-                        }) ? <div className='col-3 text-center h5'>{qteSoldes} Soldes</div> : <div className='col-3 text-center'>O SOLDES</div>}
-
-                    </div>
-
-                </div>
-
-
-
-
-
-            </Offcanvas.Body>
-        </Offcanvas>
-    </Nav.Link>
-</Nav.Item>
-</Navbar> */}
 {/* <NavDropdown title="Dropdown" id="NavDropdown" fluid>
     <NavDropdown.Item eventKey="4.1">Action</NavDropdown.Item>
     <NavDropdown.Item eventKey="4.2">Another action</NavDropdown.Item>

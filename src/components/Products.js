@@ -28,7 +28,7 @@ function Products({ products, shoppingList, setShoppingList, total, setTotal, qu
     let images = importAll(require.context('../images/', false, /\.(png|jpe?g|svg)$/));
 
     let count = 0;
-    for (let i = 1; i < 30000; i++) {
+    for (let i = 1; i < 3000; i++) {
 
         count += Math.log10(i);
         console.log(count);

@@ -1,7 +1,7 @@
-import React, { Component, useState } from 'react';
-import { Container, Image, Row, Col, Button, Card, ListGroupItem, ListGroup } from 'react-bootstrap';
+import React, { Component, lazy, Suspense, useEffect, useState } from 'react';
+import { Container, Image, Row, Col, Button, Card, ListGroupItem, ListGroup, Spinner } from 'react-bootstrap';
 import { ReactDOM } from 'react';
-
+import Loader from './Loader';
 //import chaussures from '../images/chaussures_cuire.jpg';
 //import produit_entretient from '../images/produits_entretien.jpg';
 //import cle_securite from '../images/cle_securite.jpg';
@@ -21,7 +21,22 @@ function importAll(r) {
 
 
 
-function Products({ products, shoppingList, setShoppingList, total, setTotal, quantite, setQuantite, qteTotal, setQteTotal }) {
+function Products({ products,
+    shoppingList, setShoppingList,
+    total, setTotal,
+    quantite, setQuantite,
+    qteTotal, setQteTotal
+   }) {
+
+    const [loaderProducts, setLoaderProducts] = useState(true);
+   
+
+    useEffect(() => {
+        setTimeout(() => {
+          setLoaderProducts(false);
+        }, 5000);
+      }, [])
+
 
     let list_products = products;
 
@@ -31,7 +46,7 @@ function Products({ products, shoppingList, setShoppingList, total, setTotal, qu
     for (let i = 1; i < 3000; i++) {
 
         count += Math.log10(i);
-        console.log(count);
+        // console.log(count);
     }
 
 
@@ -45,7 +60,7 @@ function Products({ products, shoppingList, setShoppingList, total, setTotal, qu
                         <Card.Text>
                             <p>{product.description}</p>
                         </Card.Text>
-                 
+
                         <Button className='text-danger justify-content-center border border-danger bg-white rounded'
                             onClick={() => {
 
@@ -132,11 +147,13 @@ function Products({ products, shoppingList, setShoppingList, total, setTotal, qu
 
     ));
 
-    return (
+    return loaderProducts ? (<Loader />) : (
+
         <Container className="justify-content-center  md-8 sm-10 lg-8" rounded >
             <h1 className="d-flex justify-content-center shadow mt-3 p-3 text-white bg-warning rounded" > Nos produits </h1>
             {rows_products}
         </Container>
+
 
 
     );

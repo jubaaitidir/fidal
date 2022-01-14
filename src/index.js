@@ -10,7 +10,13 @@ import Loader from "react-loader-spinner";
 import App from "./components/App";
 // import * as Icon from 'react-bootstrap-icons';
 import * as Icons from "react-icons/bs";
-
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  Outlet
+} from "react-router-dom";
 //const App = lazy(() => import("./components/App"));
 
 
@@ -22,7 +28,9 @@ ReactDOM.render(
   <React.StrictMode>
 
     {/* <Suspense fallback={<h2> Chargement des données... </h2>}> */}
-      <App icons={Icons}/>
+ 
+      <App icons={Icons} />
+   
     {/* </Suspense> */}
 
 

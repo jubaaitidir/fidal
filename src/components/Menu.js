@@ -6,8 +6,11 @@ import {
     BrowserRouter,
     Route,
     useParams,
-    Routes
-  } from "react-router-dom";
+    Routes,
+    Router,
+    Link,
+
+} from "react-router-dom";
 
 import logo from '../images/logo.png';
 //import chaussures from './chaussures.jpg'
@@ -45,7 +48,7 @@ function get_list_quantite(shoppingList) {
         })
         if (!product_compte) {
             list_quantite.push({ 'prod': el.prod, 'qte': q });
-            console.log(list_quantite);
+            console.log("get_list_quantite"+list_quantite);
 
         }
 
@@ -59,16 +62,22 @@ function get_list_quantite(shoppingList) {
 }
 
 
-function Menu({ products, icons }) {
+function Menu({ products,
+    shoppingList, setShoppingList,
+    total, setTotal,
+    quantite, setQuantite,
+    qteTotal, setQteTotal,
+    icons }) {
 
     // const { products } = Infos;
     const [show, setShow] = useState(false);
-    const [shoppingList, setShoppingList] = useState([]);
+
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [quantite, setQuantite] = useState(1);
-    const [total, setTotal] = useState(0);
-    const [qteTotal, setQteTotal] = useState(0);
+    // const [shoppingList, setShoppingList] = useState([]);
+    // const [quantite, setQuantite] = useState(1);
+    // const [total, setTotal] = useState(0);
+    // const [qteTotal, setQteTotal] = useState(0);
     let qteSoldes = 0;
 
     const clearBasket = () => {
@@ -87,102 +96,123 @@ function Menu({ products, icons }) {
             console.log(el.prod + ' ' + el.qte)
         })
         console.log(`nombre de produits dans le panier ${qteTotal}`);
-       
+
     };
 
 
-
- 
-    const handleSelect = (eventKey) => {
-        const Products = lazy(() => import("./Products"));
-
-        switch (eventKey) {
-            case "1": {
-                ReactDOM.render(
-                    <React.StrictMode>
-                        <Home products={products} />
-
-                    </React.StrictMode>,
-                    document.getElementById('main')
-                )
-                break;
-            }
-            case "2": {
-                ReactDOM.render(
-                    <React.StrictMode>
-                        <History />
-                        {/* <BrowserRouter>
-
-                            <Routes>
-
-                                <Route path='/History' element={<History/>} />
-
-                            </Routes>
-
-                        </BrowserRouter> */}
-
-                    </React.StrictMode>,
-                    document.getElementById('main')
-                );
-                break;
-            }
-            case "3": {
-                ReactDOM.render(
-                    <React.StrictMode>
-                        <Suspense
-
-                            fallback={
-                                <div >
-                                    <Spinner animation="border" variant="danger"
-                                        style={{
-                                            flex: 1,
-                                            marginTop: '15em',
-                                            justifyContent: 'center',
-                                            alignItems: 'center'
-                                        }
-                                        } >
-                                        {/* <span className="sr-only">Loading...</span> */}
-                                    </Spinner>
-                                    <br />
-                                    <h4 className="sr-only">Loading ...</h4>
-                                </div >}>
-                            <Products products={products} shoppingList={shoppingList} setShoppingList={setShoppingList} total={total} setTotal={setTotal} quantite={quantite} setQuantite={setQuantite} qteTotal={qteTotal} setQteTotal={setQteTotal} />
-                        </Suspense>
-                    </React.StrictMode >,
-                    document.getElementById('main')
-                );
-                break;
-            }
-            case "4": {
-                ReactDOM.render(
-                    <React.StrictMode>
-                        <Team />
-
-                    </React.StrictMode>,
-                    document.getElementById('main')
-                );
-                break;
-            }
-            case "5": {
-                // ReactDOM.render(
-                //     <React.StrictMode>
-                //       <Products products={products} shoppingList={shoppingList} setShoppingList={setShoppingList} total={total} setTotal={setTotal} />
-
-
-                //     </React.StrictMode>,
-                //     document.getElementById('main')
-                // );
-
-                break;
+  function delete_one_product(el) {
+        //const new_qte=parseInt(el.qte)-1;
+        //console.log(new_qte);
+        const old_prod=el.prod;
+        console.log('old_prod '+old_prod);
+        //shoppingList.push({ 'prod': old_prod, 'qte': new_qte });
+        
+        //let new_list=[]
+        shoppingList=[];
+        (get_list_quantite(shoppingList)).map((occ)=>{
+            if(occ.prod.id_product == el.prod.id_product){
+                shoppingList.push({ 'prod': old_prod, 'qte': occ.qte-1 });
+                console.log("je clique sur le produit id: "+el.prod.id_product);
+            }else{
+                shoppingList.push(occ);
             }
 
-            default: alert('redirect to home page');
-        }
-    };
+
+
+        })
+        //console.log(new_list);
+        console.log(get_list_quantite(shoppingList));
+        //shoppingList=new_list;
+     
+        //shoppingList.splice(index,1);
+        setShoppingList(shoppingList);
+        total -= el.prod.price;
+        setTotal(total);
+        qteTotal -= 1;
+        setQteTotal(qteTotal);
+        console.log(shoppingList)
+    }
+
+    // const handleSelect = (eventKey) => {
+    //     const Products = lazy(() => import("./Products"));
+
+    //     switch (eventKey) {
+    //         case "1": {
+    //             // ReactDOM.render(
+    //             //     <React.StrictMode>
+    //             <Home products={products} />
+    //             {/* </React.StrictMode>,
+    //                 document.getElementById('main')
+    //             ) */}
+    //             break;
+    //         }
+    //         case "2": {
+    //             ReactDOM.render(
+    //                 <React.StrictMode>
+    //                     <History />
+    //                 </React.StrictMode>,
+    //                 document.getElementById('main')
+    //             );
+    //             break;
+    //         }
+    //         case "3": {
+    //             ReactDOM.render(
+    //                 <React.StrictMode>
+    //                     <Suspense
+
+    //                         fallback={
+    //                             <div >
+    //                                 <Spinner animation="border" variant="danger"
+    //                                     style={{
+    //                                         flex: 1,
+    //                                         marginTop: '15em',
+    //                                         justifyContent: 'center',
+    //                                         alignItems: 'center'
+    //                                     }
+    //                                     } >
+    //                                     {/* <span className="sr-only">Loading...</span> */}
+    //                                 </Spinner>
+    //                                 <br />
+    //                                 <h4 className="sr-only">Loading ...</h4>
+    //                             </div >}>
+    //                         <Products products={products} shoppingList={shoppingList} setShoppingList={setShoppingList} total={total} setTotal={setTotal} quantite={quantite} setQuantite={setQuantite} qteTotal={qteTotal} setQteTotal={setQteTotal} />
+    //                     </Suspense>
+    //                 </React.StrictMode >,
+    //                 document.getElementById('main')
+    //             );
+    //             break;
+    //         }
+    //         case "4": {
+    //             ReactDOM.render(
+    //                 <React.StrictMode>
+    //                     <Team />
+
+    //                 </React.StrictMode>,
+    //                 document.getElementById('main')
+    //             );
+    //             break;
+    //         }
+    //         case "5": {
+    //             // ReactDOM.render(
+    //             //     <React.StrictMode>
+    //             //       <Products products={products} shoppingList={shoppingList} setShoppingList={setShoppingList} total={total} setTotal={setTotal} />
+
+
+    //             //     </React.StrictMode>,
+    //             //     document.getElementById('main')
+    //             // );
+
+    //             break;
+    //         }
+
+    //         default: alert('redirect to home page');
+    //     }
+    // };
 
     return (<>
+        {/* onSelect={handleSelect} */}
 
-        <Navbar className='d-flex justify-content-center' collapseOnSelect fixed='top' expand="md" style={{ backgroundColor: "#D32F2F" }} variant="dark" onSelect={handleSelect}>
+        <Navbar className='d-flex justify-content-center' collapseOnSelect fixed='top' expand="md" style={{ backgroundColor: "#D32F2F" }} variant="dark" >
             <Navbar.Brand href="/Home">
                 <logo
                     alt=""
@@ -202,7 +232,7 @@ function Menu({ products, icons }) {
                 FIDAL
             </Navbar.Brand>
 
-            <Nav.Link eventKey="5" title="équipe"  >
+            <Nav.Link eventKey="5" title="panier"  >
                 <Button className='border border-warning text-warning bg-white border-none' onClick={handleShow}>
                     Panier {((qteTotal == 0) ? <icons.BsBasket3 /> : <icons.BsBasket3Fill />)} <span className='badge bg-warning text-danger text-weight-bolder'>{qteTotal}</span>
                 </Button>
@@ -219,9 +249,9 @@ function Menu({ products, icons }) {
                             <div className='row bg-primary mt-2 rounded bg-warning'>
                                 <div className='col-3 text-center'>Produit</div>
                                 <div className='col-3 text-center'>prix</div>
-                                <div className='col-3 text-center'>Quantité</div>
+                                <div className='col-4 text-center'>Quantité</div>
 
-                                <div className='col-3 text-center'>Vente</div>
+                                <div className='col-2 text-center'>Vente</div>
                             </div>
 
 
@@ -239,7 +269,14 @@ function Menu({ products, icons }) {
                                         <div className='row bg-primary mt-2 text-weight-bold rounded' rounded>
                                             <div className='col-3 text-center'>{el.prod.name_prod}</div>
                                             <div className='col-3 text-center bg-warning'>{el.prod.price} €</div>
-                                            <div className='col-3 text-center'>{el.qte}</div>
+                                            <div className='col-4 text-center align-items-center'>
+                                                <Button className='bg-danger text-white' size='sm'
+                                                    onClick={() => {
+                                                        delete_one_product(el);
+                                                    }}>-</Button>
+                                                {" "}{el.qte}{" "}
+                                                <Button className='bg-success text-white' size='sm'>+</Button>
+                                            </div>
                                             {(el.prod.isSpecialOffer === true) && (qteSoldes++, <div className='col-3 badge bg-warning text-center'>Soldes</div>)}
                                         </div>)
                                     )
@@ -252,13 +289,13 @@ function Menu({ products, icons }) {
                             <div className='row bg-warning mt-2 rounded ' rounded>
                                 <div className='col-3 text-center h4'>{("total").toUpperCase()} </div>
                                 <div className='col-3 text-center h4'>{total} €</div>
-                                <div className='col-3 text-center h4'>{qteTotal}</div>
+                                <div className='col-4 text-center h4'>{qteTotal}</div>
                                 {get_list_quantite(shoppingList).map((el) => {
                                     if (el.prod.isSpecialOffer) {
                                         qteSoldes += el.qte;
                                     }
 
-                                }) ? <div className='col-3 text-center h5'>{qteSoldes} Soldes</div> : <div className='col-3 text-center'>O SOLDES</div>}
+                                }) ? <div className='col-2 text-center p'>{qteSoldes} Soldes</div> : <div className='col-3 text-center'>O SOLDES</div>}
 
                             </div>
                             <div className='row mt-2 rounded ' rounded>
@@ -277,14 +314,14 @@ function Menu({ products, icons }) {
                     </Offcanvas.Body>
                 </Offcanvas>
             </Nav.Link>
-            {/* 
-            </Nav> */}
+
 
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
+
                 <Nav className=" mr-auto justify-content-end">
-                    <Nav.Link eventKey="1"  className='text-center text-weight-bold'>Home</Nav.Link>
-                    <Nav.Link eventKey="2"  className='text-center'>History</Nav.Link>
+                    <Link eventKey="1" to={'/Home'} className='text-center text-weight-bold nav-link'>Home</Link>
+                    <Link eventKey="2" to={'/History'} className='text-center nav-link'>History</Link>
                     {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                         <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.2">
@@ -298,18 +335,30 @@ function Menu({ products, icons }) {
                     </NavDropdown> */}
 
 
-                    <Nav.Link className='text-center' eventKey="3"  title="produits">
+                    <Link className='text-center nav-link' to='/Products' title="produits">
                         Produits
-                    </Nav.Link>
-                    <Nav.Link className='text-center' eventKey="4"  title="équipe">
+                    </Link>
+                    <Link className='text-center nav-link' to="/Team" title="équipe">
                         Team
-                    </Nav.Link>
+                    </Link>
 
 
                 </Nav>
 
             </Navbar.Collapse>
         </Navbar>
+
+
+        {/* <Routes>
+                <Route exact path="/" element={<Home />} >
+                    <Route path="Home" element={<Home />} />
+                </Route>
+                <Route exact path="/History" element={<History />} />
+                <Route path="/Products" element={<Products />} />
+                <Route path="/Team" element={<Team />} />
+
+
+            </Routes> */}
 
     </>
     );

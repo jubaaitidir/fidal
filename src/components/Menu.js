@@ -101,12 +101,9 @@ function Menu({ products,
 
 
   function delete_one_product(el) {
-        //const new_qte=parseInt(el.qte)-1;
-        //console.log(new_qte);
+  
         const old_prod=el.prod;
-        console.log('old_prod '+old_prod);
-        //shoppingList.push({ 'prod': old_prod, 'qte': new_qte });
-        
+      
         //let new_list=[]
         shoppingList=[];
         (get_list_quantite(shoppingList)).map((occ)=>{
